@@ -1,6 +1,15 @@
 # PSD_code
 The public code for the paper "A Novel Representation of Periodic Pattern and Its Application to Untrained Anomaly Detection"
 
+## Some Results in Paper
+Please note that due to file size limitations, some of the experimental result files have been stored in Google Drive. These files include:
+`Grid_Result_final_0729.pkl` : output by `Experiment_Grid.py`, can be read using `read_result.py`
+`Grid_Result_LR_AS.pkl` : output by `Experiment_Grid_LR.py`
+`Grid_Result_PA.pkl` : output by `Experiment_Grid_PA.py`, can be read using `read_result.py`
+You can access these files via the following link:
+[Google Drive Link](https://drive.google.com/drive/folders/1r3AexLGMbtgz_17OgnT0eViy8FH-vX1I?usp=sharing)
+If you need to download these files, please click on the above link and follow the instructions provided. Thank you for your understanding!
+
 ## Experiment of the Grid dataset
 
 Run `Experiment_Grid.py` to apply the anomaly detection method to the Grid dataset from the MVTec AD dataset:
