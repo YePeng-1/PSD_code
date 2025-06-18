@@ -514,11 +514,11 @@ if __name__ == "__main__":
                         help='Tuning parameter to control the sparsity of pattern vectors lambda_1 and lambda_2')
     parser.add_argument('--rou_l1_A', type=float, default=0.02,
                         help='Tuning parameter to control the sparsity of Anomaly components')
-    parser.add_argument('--rou_l2_E', type=float, default=0.1,
+    parser.add_argument('--rou_l2_E', type=float, default=1,
                         help='Tuning parameter to control the L2 norm of Noise components')
-    parser.add_argument('--rou_row_sum', type=float, default=5,
+    parser.add_argument('--rou_row_sum', type=float, default=10,
                         help='Tuning parameter to control the sum of each row of W matrix')
-    parser.add_argument('--epsilon_lambda', type=float, default=2e-4,
+    parser.add_argument('--epsilon_lambda', type=float, default=3e-4,
                         help='Tuning parameter to control the sum of each row of W matrix')
     parser.add_argument('--max_iteration', type=int, default=200,
                         help='max iteration time')
@@ -555,11 +555,11 @@ if __name__ == "__main__":
     size_y1 = Y.shape[0]
     size_y2 = Y.shape[1]
     PE = Pattern_Extract(Y=Y, lr_l=lr_l, lr_A_E=lr_A_E,
-                          rou_l1_lambda=rou_l1_lambda,
-                          rou_l1_A=rou_l1_A,
-                          rou_l2_E=rou_l2_E,
-                          rou_row_sum=rou_row_sum,
-                          dtype=dtype, device=device, max_iteration=max_iteration, epsilon_lambda=epsilon_lambda)
+                                  rou_l1_lambda=rou_l1_lambda,
+                                  rou_l1_A=rou_l1_A,
+                                  rou_l2_E=rou_l2_E,
+                                  rou_row_sum=rou_row_sum,
+                                  dtype=dtype, device=device, max_iteration=max_iteration, epsilon_lambda=epsilon_lambda)
     PE.opti_iteration()
     # image reconstruction
     RI.Reconstruction_params(PE.lambda1, PE.lambda2, PE.Y_A_E)
@@ -568,8 +568,7 @@ if __name__ == "__main__":
     ASE = A_Score_Estimate(RI.Y_recon, img, patch_width_=patch_width, kernel_std_=kernel_std)
     a_score = ASE.Anomaly_score_map(img, RI.Y_recon)
 
-    Draw_Figures(Y, PE.Y_A_E, np.abs(PE.A),  np.abs(PE.E), a_score)
-    Draw_Figures(Y, Y[:,0].reshape(-1,1), Y[0,:].reshape(1,-1), np.abs(PE.E), a_score)
+    Draw_Figures(img, Y, PE.Y_A_E, RI.Y_recon, a_score)
 
     Draw_Pattern(PE.lambda1, PE.lambda2)
 
