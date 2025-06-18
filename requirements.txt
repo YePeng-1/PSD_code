@@ -1,0 +1,15 @@
+# Please use Python 3.8 or newer.
+
+numpy
+Pillow
+scipy
+tabulate
+tifffile
+tqdm
+matplotlib
+opencv-python
+scikit-learn
+matplotlib
+hnswlib
+numba
+torch
